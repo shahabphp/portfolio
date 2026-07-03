@@ -5,10 +5,12 @@ import { identity } from "@/lib/portfolio";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/reveal";
 
-const socials = [
+const channels = [
   { label: "Email", href: `mailto:${site.email}`, value: site.email },
-  { label: "GitHub", href: site.links.github, value: "github.com/pakshekar" },
-  { label: "X", href: site.links.x, value: "x.com/pakshekar" },
+  { label: "Phone", href: `tel:${site.phoneHref}`, value: site.phone },
+  { label: "Telegram", href: site.links.telegram, value: "t.me/shahabpk" },
+  { label: "GitHub", href: site.links.github, value: "github.com/shahabphp" },
+  { label: "X", href: site.links.x, value: "x.com/CryptoShahab" },
 ];
 
 export function Contact() {
@@ -47,12 +49,12 @@ export function Contact() {
           <div className="md:col-span-5 md:pl-8">
             <Reveal delay={0.12}>
               <ul className="space-y-px overflow-hidden rounded-[var(--radius)] border border-border">
-                {socials.map((link) => {
-                  const external = !link.href.startsWith("mailto:");
+                {channels.map((channel) => {
+                  const external = channel.href.startsWith("http");
                   return (
-                    <li key={link.label}>
+                    <li key={channel.label}>
                       <a
-                        href={link.href}
+                        href={channel.href}
                         {...(external
                           ? { target: "_blank", rel: "noopener noreferrer" }
                           : {})}
@@ -60,10 +62,10 @@ export function Contact() {
                       >
                         <span>
                           <span className="block font-mono text-[0.7rem] uppercase tracking-[0.2em] text-subtle">
-                            {link.label}
+                            {channel.label}
                           </span>
                           <span className="mt-1 block text-foreground">
-                            {link.value}
+                            {channel.value}
                           </span>
                         </span>
                         <ArrowUpRight className="size-4 text-subtle transition-colors group-hover:text-accent" />

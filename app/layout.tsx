@@ -4,7 +4,7 @@ import { GeistMono } from "geist/font/mono";
 
 import "./globals.css";
 import { site } from "@/lib/site";
-import { identity, skills } from "@/lib/portfolio";
+import { identity, skills, education } from "@/lib/portfolio";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${site.name} — ${site.role}`,
     description: site.description,
-    creator: "@pakshekar",
+    creator: "@CryptoShahab",
   },
   robots: {
     index: true,
@@ -57,15 +57,21 @@ const personSchema = {
   "@type": "Person",
   name: site.name,
   jobTitle: identity.roles,
+  description: site.description,
   url: site.url,
   email: `mailto:${site.email}`,
+  telephone: site.phone,
   address: {
-    "@type": "PostalPlace",
+    "@type": "PostalAddress",
     addressLocality: "Tehran",
     addressCountry: "IR",
   },
+  alumniOf: education.map((item) => ({
+    "@type": "CollegeOrUniversity",
+    name: item.detail,
+  })),
   knowsAbout: skills.flatMap((group) => group.items),
-  sameAs: [site.links.github, site.links.x],
+  sameAs: [site.links.github, site.links.x, site.links.telegram],
 };
 
 export default function RootLayout({

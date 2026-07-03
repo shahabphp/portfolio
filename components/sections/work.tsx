@@ -1,4 +1,4 @@
-import { projects } from "@/lib/portfolio";
+import { products } from "@/lib/portfolio";
 import { SectionHeading } from "@/components/section-heading";
 import { Reveal } from "@/components/motion/reveal";
 
@@ -9,51 +9,31 @@ export function Work() {
       className="scroll-mt-24 border-t border-border py-[var(--spacing-section)]"
     >
       <div className="container-editorial">
-        <SectionHeading index="03" eyebrow="Work" title="Selected work" />
+        <SectionHeading
+          index="03"
+          eyebrow="Work"
+          title="Selected products"
+        />
 
-        <div className="mt-16 divide-y divide-border border-y border-border">
-          {projects.map((project, i) => (
-            <Reveal as="article" key={project.index} delay={i * 0.06}>
-              <div className="group grid gap-6 py-10 md:grid-cols-12 md:gap-8 md:py-14">
-                <div className="md:col-span-4">
-                  <p className="font-mono text-xs uppercase tracking-[0.2em] text-subtle">
-                    <span className="text-accent">{project.index}</span> ·{" "}
-                    {project.kind}
-                  </p>
-                  <h3 className="mt-4 text-2xl font-medium tracking-tight text-foreground md:text-3xl">
-                    {project.title}
+        <ol className="mt-16 border-t border-border">
+          {products.map((product, i) => (
+            <Reveal as="li" key={product.name} delay={Math.min(i, 4) * 0.04}>
+              <div className="group flex flex-col gap-2 border-b border-border py-6 transition-colors hover:bg-surface/30 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:px-2">
+                <div className="flex items-baseline gap-4 sm:gap-6">
+                  <span className="font-mono text-xs text-accent">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="text-lg font-medium tracking-tight text-foreground md:text-xl">
+                    {product.name}
                   </h3>
                 </div>
-
-                <div className="md:col-span-8 md:pl-4">
-                  <p className="max-w-2xl text-pretty text-lg leading-relaxed text-foreground/85">
-                    {project.description}
-                  </p>
-
-                  {project.impact && (
-                    <p className="mt-4 max-w-2xl text-pretty leading-relaxed text-muted">
-                      <span className="font-mono text-xs uppercase tracking-[0.18em] text-accent">
-                        Impact
-                      </span>{" "}
-                      — {project.impact}
-                    </p>
-                  )}
-
-                  <ul className="mt-6 flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <li
-                        key={tag}
-                        className="rounded-full border border-border bg-surface/50 px-3 py-1 font-mono text-[0.7rem] tracking-wide text-subtle"
-                      >
-                        {tag}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <span className="pl-8 font-mono text-xs uppercase tracking-[0.16em] text-subtle sm:pl-0 sm:text-right">
+                  {product.role}
+                </span>
               </div>
             </Reveal>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );
